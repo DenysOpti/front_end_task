@@ -1,0 +1,28 @@
+
+services:
+
+  api:
+    container_name: api
+    build: 
+      context: api
+      dockerfile: Dockerfile
+    command: python3 main.py 
+    env_file:
+      - ./api/.env
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - 8000:8000
+      
+  
+  ui:
+    build: 
+      context: ./ui
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./ui:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: npm run dev
