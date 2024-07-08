@@ -28,13 +28,15 @@ export const Chatbot: React.FC<props> = ({ model }) => {
       type: model?.value || "",
       content: input,
     });
-    setChatHistory((previousState) => [
-      ...previousState,
-      {
-        role: model?.value || "",
-        content: resp,
-      },
-    ]);
+    if (resp) {
+      setChatHistory((previousState) => [
+        ...previousState,
+        {
+          role: model?.value || "",
+          content: resp,
+        },
+      ]);
+    }
   };
   return (
     <>
